@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+</head>
+<body>
+    <div class="container">
+       
+        
+        <aside class="sidebar">
+            <nav>
+            
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
+                            <img src="{% static 'images/icons8-home-24.png' %}" alt="Home" class="nav-icon">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'employee_list' %}" class="{% if request.path == '/employees/' %}active{% endif %}">
+                            <img src="{% static 'images/icons8-employee-50.png' %}" alt="Employee" class="nav-icon">
+                            Employee
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'add_employee' %}" class="{% if request.path == '/employees/add/' %}active{% endif %}">
+                            <img src="{% static 'images/icons8-key-64.png' %}" alt="Add Employee" class="nav-icon">
+                            Add Employee
+                        </a>
+                    </li>
+                </ul>
+                
+            </nav>
+        </aside>
+
+    <main class="content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Add Employee</button>
+        </form>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    /* background-color: #b5d9ff; */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.content {
+    margin-left: 220px; /* Adjust margin to account for sidebar width */
+    padding: 20px;
+    width: calc(100% - 220px);
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.actions input {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.actions select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.actions .btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+.actions .btn:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .step-links {
+    display: inline-block;
+}
+
+.pagination .current {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+}
+
+td a {
+    margin-right: 10px;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.pagination .left-side {
+    text-align: left;
+}
+
+.pagination .right-side {
+    text-align: right;
+}
+
+.pagination a {
+    padding: 8px 16px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #f1f1f1;
+}
+
+.ftr{
+    text-align: center;
+}

@@ -1,0 +1,116 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
+                            <img src="{% static 'images/icons8-home-24.png' %}" alt="Home" class="nav-icon">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'employee_list' %}" class="{% if request.path == '/employees/' %}active{% endif %}">
+                            <img src="{% static 'images/icons8-employee-50.png' %}" alt="Employee" class="nav-icon">
+                            Employee
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'add_employee' %}" class="{% if request.path == '/employees/add/' %}active{% endif %}">
+                            <img src="{% static 'images/icons8-key-64.png' %}" alt="Add Employee" class="nav-icon">
+                            Add Employee
+                        </a>
+                    </li>
+                </ul>
+                </ul>
+                
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h1>Employee List</h1>
+                
+                <div class="actions">
+                    <input type="text" id="searchInput" placeholder="Search by name or email" value="{{ request.GET.search }}">
+                    <select id="sortSelect">
+                        <option value="first_name" {% if sort_by == 'first_name' %}selected{% endif %}>Name</option>
+                        <option value="email" {% if sort_by == 'email' %}selected{% endif %}>Email</option>
+                        <option value="mobile" {% if sort_by == 'mobile' %}selected{% endif %}>Mobile</option>
+                        <option value="date_of_birth" {% if sort_by == 'date_of_birth' %}selected{% endif %}>Date of Birth</option>
+                    </select>
+                    <a href="{% url 'add_employee' %}" class="btn">Add Employee</a>
+                </div>
+            </header>
+
+            <main>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Date of Birth</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for employee in page_obj %}
+                        <tr>
+                         <td>
+                                <img src="{{ employee.photo.url }}" alt="Photo" class="thumbnail">
+                            </td>
+                            <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>{{ employee.mobile }}</td>
+                            <td>{{ employee.date_of_birth }}</td>
+                            <td>
+                                <a href="{% url 'edit_employee' employee.pk %}">
+                                    <img src="{% static 'images/icons8-edit-30.png' %}" alt="Edit" class="icon">
+                                </a>
+                                <a href="{% url 'delete_employee' employee.pk %}">
+                                    <img src="{% static 'images/icons8-delete-30.png' %}" alt="Delete" class="icon">
+                                </a>
+                            </td>
+                            
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6">No employees found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1&search={{ request.GET.search }}&sort_by={{ sort_by }}">First</a>
+                            <a href="?page={{ page_obj.previous_page_number }}&search={{ request.GET.search }}&sort_by={{ sort_by }}">Previous</a>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}&search={{ request.GET.search }}&sort_by={{ sort_by }}">Next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}&search={{ request.GET.search }}&sort_by={{ sort_by }}">Last</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </main>
+        </main>
+    </div>
+    <footer class="ftr">
+        <p>&copy;2024 All rights reserved.</p>
+    </footer>
+</body>
+</html>
